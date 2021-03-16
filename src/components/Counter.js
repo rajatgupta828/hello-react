@@ -1,8 +1,53 @@
 import  React, {Component } from "react";
 
 class Counter extends Component{
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             count: 0
+        }
+    }
+    
+    increment(){
+        /* First way of calling setState, second way is to call a callback method
+        that is the second parameter to the setState method
+
+        this.setState({
+            count : this.state.count + 1
+        })
+        */
+       /* Other way is to pass 2 parameters to the setState method like
+       given below */ 
+       /* this.setState({
+           count: this.state.count + 1
+       },() => {console.log("Callback Value",this.state.count)}
+       ) */
+
+       /*
+       To setState based on previous value
+       */
+       this.setState((prevState) => ({
+        count: prevState.count + 1
+       }
+       ),console.log(this.state.count))
+    }
+
+    incrementFive(){
+        this.increment();
+        this.increment();
+        this.increment();
+        this.increment();
+        this.increment();
+    }
+
     render(){
-        return <h1> Hello from Counter</h1>
+        return (
+            <div>
+                <h1>Count -  {this.state.count}</h1>
+                <button onClick = {() => this.incrementFive()}>Incr</button>
+            </div>
+        )
     }
 }
 
